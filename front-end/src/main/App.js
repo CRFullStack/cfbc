@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { testAction } from "../redux/actions/prodAction";
+import Nav from "../nav/nav";
 import "./App.css";
 
 class App extends React.Component {
@@ -13,23 +14,7 @@ class App extends React.Component {
   };
 
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img
-            src="https://miro.medium.com/max/540/1*7A4lpkuHgEyGrIYzfAj4dA.png"
-            className="App-logo"
-            alt="logo"
-          />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <pre>{JSON.stringify(this.props)}</pre>
-        <button onClick={this.testAction}>Test redux action</button>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
+    return <Nav />;
   }
 }
 /**
