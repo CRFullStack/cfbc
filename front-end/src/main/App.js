@@ -2,21 +2,26 @@ import React from "react";
 import { connect } from "react-redux";
 import { testAction } from "../redux/actions/prodAction";
 import Nav from "../nav/nav";
+import Head from "../header/header";
 import "./App.css";
 
 class App extends React.Component {
-  /**
-   * @memberof App
-   * @summary handles button click
-   */
+  // this calls mapDispatchtoProps
   testAction = event => {
     this.props.testAction();
   };
 
   render() {
-    return <Nav />;
+    return (
+      <React.Fragment>
+        <Nav />
+        <Head />
+      </React.Fragment>
+    );
   }
 }
+
+/// Redux stuff from here on
 /**
  *
  * The mapStateToProps parameter of connect allows
