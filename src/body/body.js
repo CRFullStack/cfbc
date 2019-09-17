@@ -3,9 +3,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
+import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import SimpleModal from "../modal/popup";
+import Delete from "@material-ui/icons/DeleteOutlined";
+import CloseIcon from "@material-ui/icons/Close";
+
 import "./body.scss";
 
 const useStyles = makeStyles({
@@ -61,7 +65,9 @@ const Body = props => {
                 component="ul"
               >
                 {team.players.map((player, index) => (
-                  <li>{player}</li>
+                  <li onClick={() => props.deletePlayer(team.teamName, player)}>
+                    {player}
+                  </li>
                 ))}
               </Typography>
             </CardContent>
@@ -72,6 +78,13 @@ const Body = props => {
                 teamName={team.teamName}
                 runFunc={props.addPlayer}
               />
+              <IconButton aria-label="add to favorites" color="secondary">
+                <Delete
+                  onClick={() => {
+                    props.deleteTeam(team.teamName);
+                  }}
+                />
+              </IconButton>
             </CardActions>
           </Card>
         ))}

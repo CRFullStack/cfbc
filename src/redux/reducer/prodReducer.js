@@ -56,6 +56,21 @@ const productionReducer = (state = initialState, action) => {
     );
     searched.players.push(action.payload.player);
   }
+  if (action.type === "DELETE_TEAM") {
+    const index = newState.teams.findIndex(x => x.teamName === action.payload);
+    newState.teams.splice(index, 1);
+    console.log("team deleted: ", index);
+  }
+  if (action.type === "DELETE_PLAYER") {
+    const indexOfTeam = newState.teams.findIndex(
+      x => x.teamName === action.payload.teamName
+    );
+    const indexOfPlayer = newState.teams[indexOfTeam].players.findIndex(
+      x => x === action.payload.player
+    );
+    newState.teams[indexOfTeam].players.splice(indexOfPlayer, 1);
+    console.log("player index: ", indexOfPlayer);
+  }
 
   console.log("new current: ", newState);
   return newState;

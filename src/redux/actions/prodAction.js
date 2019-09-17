@@ -11,16 +11,33 @@ export const testAction = () => dispatch => {
   });
 };
 
-export const addTeamAction = team => dispatch => {
+export const addTeamAction = _team => dispatch => {
   dispatch({
     type: "ADD_TEAM",
-    payload: team
+    payload: _team
   });
 };
 
 export const addPlayerAction = (_teamName, _player) => dispatch => {
   dispatch({
     type: "ADD_PLAYER",
+    payload: {
+      teamName: _teamName,
+      player: _player
+    }
+  });
+};
+
+export const deleteTeamAction = _teamName => dispatch => {
+  dispatch({
+    type: "DELETE_TEAM",
+    payload: _teamName
+  });
+};
+
+export const deletePlayerAction = (_teamName, _player) => dispatch => {
+  dispatch({
+    type: "DELETE_PLAYER",
     payload: {
       teamName: _teamName,
       player: _player
