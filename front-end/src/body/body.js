@@ -10,9 +10,12 @@ import "./body.scss";
 
 const useStyles = makeStyles({
   card: {
-    width: "20%",
     background: "#ccc",
-    margin: "8px 16px"
+    margin: "8px 16px",
+    padding: "0 36px"
+  },
+  cardContent: {
+    padding: "16px 0"
   },
   bullet: {
     display: "inline-block",
@@ -20,7 +23,7 @@ const useStyles = makeStyles({
     transform: "scale(0.8)"
   },
   title: {
-    fontSize: 14
+    fontSize: 24
   },
   pos: {
     marginBottom: 12
@@ -40,16 +43,23 @@ const Body = props => {
       <div className="body-info">
         {props.teams.map(team => (
           <Card className={classes.card}>
-            <CardContent>
+            <CardContent className={classes.cardContent}>
               <Typography
                 className={classes.title}
-                color="textSecondary"
+                color="textPrimary"
+                align="left"
                 gutterBottom
+                variant="h3"
               >
-                {team.teamName}
+                {team.teamName} Team
               </Typography>
 
-              <Typography variant="body2" component="ul">
+              <Typography
+                color="textSecondary"
+                variant="body2"
+                align="left"
+                component="ul"
+              >
                 {team.players.map((player, index) => (
                   <li>{player}</li>
                 ))}

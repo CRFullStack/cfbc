@@ -15,3 +15,26 @@
         align-self: center;
     }
 }
+
+@media only screen and (max-width: 800px){
+    .body-content{
+        display: flex;
+        flex-direction: column;
+        margin: 0px 0px;
+    }
+}
+
+@media only screen and (max-width: 460px){
+    .body-content{
+        display: flex;
+        flex-direction: column;
+        margin: 0px 0px;
+
+        .body-info{
+            display: flex;
+            flex-direction: column;
+            margin: 32px 0px;
+    
+        }
+    }
+}

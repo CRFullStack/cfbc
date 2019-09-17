@@ -10,8 +10,8 @@ function rand() {
 }
 
 function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
+  const top = 50;
+  const left = 50;
 
   return {
     top: `${top}%`,
@@ -23,7 +23,7 @@ function getModalStyle() {
 const useStyles = makeStyles(theme => ({
   paper: {
     position: "absolute",
-    width: 400,
+    width: "80%",
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
@@ -37,7 +37,7 @@ const SimpleModal = props => {
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
   const [values, setValues] = React.useState({
-    name: "Cat in the Hat"
+    name: ""
   });
 
   const handleChange = name => event => {
@@ -56,9 +56,10 @@ const SimpleModal = props => {
     <div>
       <Button
         onClick={handleOpen}
-        variant="contained"
+        variant="outlined"
         color="secondary"
         className={classes.button}
+        size="small"
       >
         {props.title}
       </Button>
@@ -72,7 +73,7 @@ const SimpleModal = props => {
           <form className={classes.container} noValidate autoComplete="off">
             <TextField
               id="standard-name"
-              label="Full Name"
+              label="Enter Full Name"
               className=""
               value={values.name}
               onChange={handleChange("name")}
@@ -85,6 +86,7 @@ const SimpleModal = props => {
               }}
               color="secondary"
               className=""
+              size="small"
             >
               {props.subTitle}
             </Button>
