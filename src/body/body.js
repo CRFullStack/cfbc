@@ -53,8 +53,13 @@ const Body = props => {
   return (
     <div className="body-content">
       <div className="body-header">
-        <Typography variant="h3" gutterBottom align="center">
-          Welcome to the CFBC Church Family Feud sign up page!
+        <Typography
+          variant="h3"
+          gutterBottom
+          align="center"
+          className={classes.info}
+        >
+          Welcome to the CFBC Family Feud sign up page!
         </Typography>
         <Typography variant="h6" gutterBottom align="center">
           <p>Here are some instructions for using the site:</p>
