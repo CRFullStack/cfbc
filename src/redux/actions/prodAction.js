@@ -4,43 +4,71 @@
  * What makes a particular action unique is the type key defined in it.
  */
 
-export const testAction = () => dispatch => {
+import axios from "axios";
+
+export const getDataAction = () => async dispatch => {
+  let data = await axios.get(`https://chobdy-api.herokuapp.com/cfbc/`);
   dispatch({
-    type: "MESSAGE",
-    payload: "Our production script!"
+    type: "GET_DATA",
+    payload: data
   });
 };
 
-export const addTeamAction = _team => dispatch => {
-  dispatch({
-    type: "ADD_TEAM",
-    payload: _team
-  });
+export const addTeamAction = teamName => async dispatch => {
+  if (teamName) {
+    let data = await axios.post(
+      `https://chobdy-api.herokuapp.com/cfbc/addteam`,
+      {
+        teamName: teamName
+      }
+    );
+    console.log("Data from react team action: ", data);
+    dispatch({
+      type: "ADD_TEAM",
+      payload: data
+    });
+  } else {
+    alert("Team Name cannot be blank!");
+  }
 };
 
-export const addPlayerAction = (_teamName, _player) => dispatch => {
+export const addPlayerAction = (teamName, player) => async dispatch => {
+  let data = await axios.post(
+    `https://chobdy-api.herokuapp.com/cfbc/addplayer`,
+    {
+      teamName: teamName,
+      player: player
+    }
+  );
+
   dispatch({
     type: "ADD_PLAYER",
     payload: {
-      teamName: _teamName,
-      player: _player
+      data
     }
   });
 };
 
-export const deleteTeamAction = _teamName => dispatch => {
+export const deleteTeamAction = teamName => async dispatch => {
+  let data = await axios.delete(
+    `https://chobdy-api.herokuapp.com/cfbc/deleteteam`,
+    { data: { teamName: teamName } }
+  );
+
   dispatch({
     type: "DELETE_TEAM",
-    payload: _teamName
+    payload: data
   });
 };
 
-export const deletePlayerAction = (_teamName, _player) => dispatch => {
+export const deletePlayerAction = (teamName, player) => async dispatch => {
+  let data = await axios.delete(
+    `https://chobdy-api.herokuapp.com/cfbc/deleteplayer`,
+    { data: { teamName: teamName, player: player } }
+  );
+
   dispatch({
     type: "DELETE_PLAYER",
-    payload: {
-      teamName: _teamName,
-      player: _player
-    }
+    payload: data
   });
 };

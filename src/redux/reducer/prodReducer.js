@@ -4,72 +4,29 @@
  */
 
 const initialState = {
-  teams: [
-    {
-      teamName: "Green",
-      players: ["Chris", "Mom", "Hayden"]
-    },
-    {
-      teamName: "Red",
-      players: ["Chris", "Mom"]
-    },
-    {
-      teamName: "Yellow",
-      players: ["Chris", "Mom", "Hayden"]
-    },
-    {
-      teamName: "Gold",
-      players: ["Chris", "Mom", "Hayden", "Kevin"]
-    },
-    {
-      teamName: "Black",
-      players: ["Chris", "Mom", "Hayden", "Gwen", "Joey"]
-    }
-  ]
+  teams: []
 };
 
 // When the reducer receives an action from dispach,
 const productionReducer = (state = initialState, action) => {
-  const newState = { ...state };
+  let newState = { ...state };
 
   // Our dispach actions go here
 
-  if (action.type === "MESSAGE") {
-    newState.message = action.payload;
+  if (action.type === "GET_DATA") {
+    newState = { ...newState, teams: action.payload.data };
   }
   if (action.type === "ADD_TEAM") {
-    const teamNameCheck = newState.teams.filter(
-      team => team.teamName.toLowerCase() === action.payload.toLowerCase()
-    );
-    if (teamNameCheck && teamNameCheck.length) {
-      // array and array.length are truthy then
-      // That team exist already
-      console.log("That team name exist");
-      alert("That team name already exist, please choose another.");
-    } else {
-      newState.teams.push({ teamName: action.payload, players: [] });
-    }
+    newState = { ...newState, teams: action.payload.data };
   }
   if (action.type === "ADD_PLAYER") {
-    const searched = newState.teams.find(
-      team => team.teamName === action.payload.teamName
-    );
-    searched.players.push(action.payload.player);
+    newState = { ...newState, teams: action.payload.data.data };
   }
   if (action.type === "DELETE_TEAM") {
-    const index = newState.teams.findIndex(x => x.teamName === action.payload);
-    newState.teams.splice(index, 1);
-    console.log("team deleted: ", index);
+    newState = { ...newState, teams: action.payload.data };
   }
   if (action.type === "DELETE_PLAYER") {
-    const indexOfTeam = newState.teams.findIndex(
-      x => x.teamName === action.payload.teamName
-    );
-    const indexOfPlayer = newState.teams[indexOfTeam].players.findIndex(
-      x => x === action.payload.player
-    );
-    newState.teams[indexOfTeam].players.splice(indexOfPlayer, 1);
-    console.log("player index: ", indexOfPlayer);
+    newState = { ...newState, teams: action.payload.data };
   }
 
   console.log("new current: ", newState);

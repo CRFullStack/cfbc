@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import {
-  testAction,
+  getDataAction,
   addTeamAction,
   addPlayerAction,
   deleteTeamAction,
@@ -10,12 +10,13 @@ import {
 import Nav from "../nav/nav";
 import Head from "../header/header";
 import Body from "../body/body";
+import Footer from "../footer/footer";
 import "./App.css";
 
 class App extends React.Component {
   // this calls mapDispatchtoProps
-  testAction = event => {
-    this.props.testAction();
+  getData = event => {
+    this.props.getData();
   };
 
   addTeam = (teamName, player) => {
@@ -39,12 +40,14 @@ class App extends React.Component {
         <Nav />
         <Head />
         <Body
+          getData={this.getData}
           deletePlayer={this.deletePlayer}
           deleteTeam={this.deleteTeam}
           addPlayer={this.addPlayer}
           addTeam={this.addTeam} // this adds a card for the teams
           teams={this.props.productionReducer.teams} // passes array from reducer to body component
         />
+        <Footer />
       </React.Fragment>
     );
   }
@@ -66,7 +69,7 @@ const mapStateToProps = state => ({
     an object of action creators wrapped into a dispatch.
  */
 const mapDispatchToProps = dispatch => ({
-  testAction: () => dispatch(testAction()),
+  getData: () => dispatch(getDataAction()),
   addTeam: teamName => dispatch(addTeamAction(teamName)),
   addPlayer: (teamName, player) => dispatch(addPlayerAction(teamName, player)),
   deleteTeam: teamName => dispatch(deleteTeamAction(teamName)),
